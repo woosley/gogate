@@ -1,5 +1,6 @@
 # gogate
-report server/service status
+Report server/service status. This is not just another metrics system, it is
+just a tool to reflect your current infrastructure facts without effort
 
 # status
 
