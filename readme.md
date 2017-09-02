@@ -9,7 +9,7 @@ work in progress
 # run
  
 ```
-go install gogate
+go install github.com/woosley/gogate
 gogate -h
 ```
 
