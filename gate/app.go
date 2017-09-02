@@ -3,10 +3,10 @@ package gate
 import (
 	"fmt"
 	"github.com/labstack/echo"
-	"gogate/gate/facts"
-	"gogate/gate/handlers"
-	"gogate/gate/types"
-	"gogate/gate/utils"
+	"github.com/woosley/gogate/gate/facts"
+	"github.com/woosley/gogate/gate/handlers"
+	"github.com/woosley/gogate/gate/types"
+	"github.com/woosley/gogate/gate/utils"
 	"time"
 )
 

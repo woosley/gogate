@@ -3,8 +3,8 @@ package handlers
 import (
 	"encoding/json"
 	"github.com/labstack/echo"
-	"gogate/gate/types"
-	"gogate/gate/utils"
+	"github.com/woosley/gogate/gate/types"
+	"github.com/woosley/gogate/gate/utils"
 	"io/ioutil"
 	"net/http"
 )

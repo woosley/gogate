@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"gogate/gate/types"
+	"github.com/woosley/gogate/gate/types"
 	"io/ioutil"
 	"net/http"
 	"strings"

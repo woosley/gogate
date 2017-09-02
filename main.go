@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	"gogate/gate"
-	"gogate/gate/types"
+	"github.com/woosley/gogate/gate"
+	"github.com/woosley/gogate/gate/types"
 	"net/url"
 	"os"
 )

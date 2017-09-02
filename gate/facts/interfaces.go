@@ -4,7 +4,7 @@ package facts
 import (
 	"bytes"
 	"fmt"
-	"gogate/gate/types"
+	"github.com/woosley/gogate/gate/types"
 	"net"
 	"strings"
 )
