@@ -26,6 +26,7 @@ func looper(options types.Opt) {
 	status.Hostname, _ = facts.GetHostname()
 	status.Interfaces, _ = facts.GetIfs()
 	status.Memory, status.Swap, _ = facts.GetMemory()
+	status.Cpu, _ = facts.GetCpu()
 	if options.Is_master {
 		key := utils.FindKey(status, options.Key, contents)
 		contents[key] = status
