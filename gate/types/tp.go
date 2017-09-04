@@ -32,6 +32,12 @@ type State struct {
 	Interfaces []Intf
 	Memory     string
 	Swap       string
+	Cpu        CpuInfo
+}
+
+type CpuInfo struct {
+	Count int
+	Cores int
 }
 
 type Content map[string]State

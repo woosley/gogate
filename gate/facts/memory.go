@@ -11,10 +11,9 @@ func GetMemory() (string, string, error) {
 	switch os := runtime.GOOS; os {
 	case "linux":
 		return getMemoryLinux()
-	case "default":
+	default:
 		return "", "", nil
 	}
-	return "", "", nil
 }
 
 //getMemoryLinux returns both MemTotal and SwapTotal

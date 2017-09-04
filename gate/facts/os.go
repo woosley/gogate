@@ -15,7 +15,7 @@ func GetOs() string {
 	case "darwin":
 		return getMacDistro()
 	default:
-		return "Unknow"
+		return "Unknown"
 	}
 }
 
