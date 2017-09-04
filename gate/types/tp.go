@@ -30,6 +30,8 @@ type State struct {
 	Os         string
 	Hostname   string
 	Interfaces []Intf
+	Memory     string
+	Swap       string
 }
 
 type Content map[string]State
