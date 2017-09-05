@@ -3,6 +3,7 @@ package facts
 import (
 	"io/ioutil"
 	"os"
+	"strings"
 	"runtime"
 )
 
@@ -23,7 +24,7 @@ func getLinuxDistro() string {
 
 	if _, err := os.Stat(redhat); !os.IsExist(err) {
 		if bytes, err := ioutil.ReadFile("/etc/redhat-release"); err == nil {
-			return string(bytes)
+			return strings.TrimSpace(string(bytes))
 		}
 	}
 	return "Unknown"

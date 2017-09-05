@@ -2,6 +2,11 @@
 Report server/service status. This is not just another metrics system, it is
 just a tool to reflect your current infrastructure facts without effort
 
+# when to use it?
+
+- When you have a horriable infrastructure, you may find this useful. 
+- When you have a good infrastructure, and a CMDB to control the `desired status`, you can still have it to serve as an view to `current status`.
+ 
 # status
 
 work in progress
@@ -44,9 +49,9 @@ Date: Mon, 28 Aug 2017 08:36:36 GMT
 ```
 # design
 
-loop forever to  report status of the server
+loop forever to report status of the server
 
-- / redirect to master
-- /self: self status
-- put /identifier forward to master
-- /health show health status json
+- GET /: Redirect to master on node; Return all nodes on master
+- GET /self: current node status
+- POST /: Not allowed on node; Create new record on master
+- GET /health: show health status json
