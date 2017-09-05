@@ -13,16 +13,16 @@ var options types.Opt = types.Opt{
 	Listen:    1234,
 	Help:      false,
 	Is_master: false,
-	Expire:    60,
 	Key:       "ip",
+	//Expire:    60,
 }
 
 func init() {
+	//flag.IntVar(&options.Listen, "expire", options.Listen, "expire time in seconds")
 	flag.StringVar(&options.Master_addr, "master", "", "master url")
 	flag.StringVar(&options.Master_addr, "m", "", "master url")
 	flag.IntVar(&options.Listen, "port", options.Listen, "listen port")
 	flag.IntVar(&options.Listen, "p", options.Listen, "listen port")
-	flag.IntVar(&options.Listen, "expire", options.Listen, "expire time in seconds")
 	flag.BoolVar(&options.Is_master, "is-master", options.Is_master, "is master or not")
 	flag.BoolVar(&options.Help, "help", options.Help, "show help")
 	flag.BoolVar(&options.Help, "h", options.Help, "show help")
@@ -32,14 +32,14 @@ func init() {
 }
 
 func print_help() {
-	help := `gotypes -- keep your machine state
+	help := `gogate -- keep your machine state
 	-h|--help show help 
 	-p|--port listen port
 	-m|--master master url
 	-k|--key the uniq key to the node
 	--is-master start node as master
-	--expire expire time in seconds on master
 	`
+	//--expire expire time in seconds on master
 	fmt.Println(help)
 }
 

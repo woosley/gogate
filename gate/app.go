@@ -33,6 +33,7 @@ func looper(options types.Opt) {
 	} else {
 		utils.ForwardToMaster(options.Master_addr, status)
 	}
+	status.LastUpdate = time.Now().Unix()
 }
 
 func App(options types.Opt) {

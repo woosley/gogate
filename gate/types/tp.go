@@ -33,6 +33,7 @@ type State struct {
 	Memory     string
 	Swap       string
 	Cpu        CpuInfo
+	LastUpdate int64
 }
 
 type CpuInfo struct {
