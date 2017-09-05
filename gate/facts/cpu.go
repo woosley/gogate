@@ -30,7 +30,7 @@ func getCpuLinux() (types.CpuInfo, error) {
 			line := fscanner.Text()
 			if strings.Contains(line, ":") {
 				kv := strings.SplitN(fscanner.Text(), ":", 2)
-				cpuinfo[strings.Trim(kv[0], " ")] = strings.Trim(kv[1], " ")
+				cpuinfo[strings.TrimSpace(kv[0])] = strings.TrimSpace(kv[1])
 			}
 		}
 		cpu.Count, _ = strconv.Atoi(cpuinfo["physical id"])
