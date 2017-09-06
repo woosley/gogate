@@ -47,3 +47,9 @@ func Create(c echo.Context) error {
 	ccc.Contents[key] = data
 	return ccc.String(http.StatusCreated, key)
 }
+
+func Health(c echo.Context) error {
+	ccc := c.(*types.CustomContext)
+	m := map[string]string{"state": "running"}
+	return ccc.JSON(http.StatusOK, m)
+}

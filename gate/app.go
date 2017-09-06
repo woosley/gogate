@@ -49,8 +49,9 @@ func App(options types.Opt) {
 
 	go run_for_ever(options)
 
-	e.GET("/self", handlers.Self)
 	e.GET("/", handlers.Index)
+	e.GET("/self", handlers.Self)
+	e.GET("/health", handlers.Health)
 	e.POST("/", handlers.Create)
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%d", options.Listen)))
 }

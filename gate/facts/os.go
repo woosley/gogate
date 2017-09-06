@@ -3,8 +3,8 @@ package facts
 import (
 	"io/ioutil"
 	"os"
-	"strings"
 	"runtime"
+	"strings"
 )
 
 const redhat string = "/etc/redhat-release"
