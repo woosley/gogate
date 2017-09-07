@@ -12,12 +12,12 @@ import (
 
 var status types.State
 
-var contents types.Content = make(types.Content)
+var contents types.Content = types.NewContent()
 
-func run_for_ever(options types.Opt) {
+func runForever(options types.Opt) {
 	for {
 		looper(options)
-		time.Sleep(5000 * time.Millisecond)
+		time.Sleep(1000 * time.Millisecond)
 	}
 }
 
@@ -29,7 +29,7 @@ func looper(options types.Opt) {
 	status.Cpu, _ = facts.GetCpu()
 	if options.Is_master {
 		key := utils.FindKey(status, options.Key, contents)
-		contents[key] = status
+		contents.Set(key, status)
 	} else {
 		utils.ForwardToMaster(options.Master_addr, status)
 	}
@@ -42,12 +42,12 @@ func App(options types.Opt) {
 	// pass options to context
 	e.Use(func(h echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
-			ccc := &types.CustomContext{c, options, status, contents}
+			ccc := &types.CustomContext{c, options, status, &contents}
 			return h(ccc)
 		}
 	})
 
-	go run_for_ever(options)
+	go runForever(options)
 
 	e.GET("/", handlers.Index)
 	e.GET("/self", handlers.Self)

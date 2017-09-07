@@ -19,7 +19,7 @@ func FindKey(body types.State, key string, contents types.Content) string {
 		for _, v := range body.Interfaces {
 			// if there is already a same key in content
 			for _, _ip := range v.Ips {
-				_, exists := contents[_ip]
+				_, exists := contents.Get(_ip)
 				if exists {
 					return _ip
 				}
@@ -39,7 +39,7 @@ func FindKey(body types.State, key string, contents types.Content) string {
 		var mac string
 		for _, v := range body.Interfaces {
 			// if there is already a same key in content
-			_, exists := contents[v.Mac]
+			_, exists := contents.Get(v.Mac)
 			if exists {
 				return v.Mac
 			}

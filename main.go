@@ -9,12 +9,15 @@ import (
 	"os"
 )
 
+const VERSION = "0.1"
+
 var options types.Opt = types.Opt{
 	Listen:    1234,
 	Help:      false,
 	Is_master: false,
 	Key:       "ip",
 	//Expire:    60,
+	Version: false,
 }
 
 func init() {
@@ -28,6 +31,8 @@ func init() {
 	flag.BoolVar(&options.Help, "h", options.Help, "show help")
 	flag.StringVar(&options.Key, "k", options.Key, "the uniq key to the nodes")
 	flag.StringVar(&options.Key, "key", options.Key, "the uniq key to the nodes")
+	flag.BoolVar(&options.Version, "v", options.Version, "print current version")
+	flag.BoolVar(&options.Version, "version", options.Version, "print current version")
 	flag.Usage = print_help
 }
 
@@ -37,6 +42,7 @@ func print_help() {
 	-p|--port listen port
 	-m|--master master url
 	-k|--key the uniq key to the node
+	-v|--version show the current version
 	--is-master start node as master
 	`
 	//--expire expire time in seconds on master
@@ -47,6 +53,10 @@ func main() {
 	flag.Parse()
 	if options.Help {
 		print_help()
+		os.Exit(0)
+	}
+	if options.Version {
+		fmt.Printf("gogate version: %s\n", VERSION)
 		os.Exit(0)
 	}
 
