@@ -63,8 +63,8 @@ type Content struct {
 	m map[string]State
 }
 
-func NewContent() Content {
-	return Content{
+func NewContent() *Content {
+	return &Content{
 		m: make(map[string]State),
 	}
 }

@@ -12,7 +12,7 @@ import (
 
 var status types.State
 
-var contents types.Content = types.NewContent()
+var contents *types.Content = types.NewContent()
 
 func runForever(options types.Opt) {
 	for {
@@ -28,7 +28,7 @@ func looper(options types.Opt) {
 	status.Memory, status.Swap, _ = facts.GetMemory()
 	status.Cpu, _ = facts.GetCpu()
 	if options.Is_master {
-		key := utils.FindKey(status, options.Key, contents)
+		key := utils.FindKey(status, options.Key, *(contents))
 		contents.Set(key, status)
 	} else {
 		utils.ForwardToMaster(options.Master_addr, status)
@@ -42,7 +42,7 @@ func App(options types.Opt) {
 	// pass options to context
 	e.Use(func(h echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
-			ccc := &types.CustomContext{c, options, status, &contents}
+			ccc := &types.CustomContext{c, options, status, contents}
 			return h(ccc)
 		}
 	})

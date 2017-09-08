@@ -9,6 +9,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strings"
+	"time"
 )
 
 // find key value for types.State
@@ -57,7 +58,10 @@ func ForwardToMaster(master string, data types.State) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	res, err := http.Post(master, "text/plain", bytes.NewReader(content))
+	client := http.Client{
+		Timeout: 5 * time.Second,
+	}
+	res, err := client.Post(master, "text/plain", bytes.NewReader(content))
 	if err != nil {
 		return "", err
 	}
