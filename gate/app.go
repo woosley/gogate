@@ -28,7 +28,7 @@ func looper(options types.Opt) {
 	status.Memory, status.Swap, _ = facts.GetMemory()
 	status.Cpu, _ = facts.GetCpu()
 	if options.Is_master {
-		key := utils.FindKey(status, options.Key, *(contents))
+		key := utils.FindKey(status, options.Key, contents)
 		contents.Set(key, status)
 	} else {
 		utils.ForwardToMaster(options.Master_addr, status)

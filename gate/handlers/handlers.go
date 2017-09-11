@@ -43,7 +43,7 @@ func Create(c echo.Context) error {
 		return err
 	}
 
-	key := utils.FindKey(data, ccc.Opts.Key, *(ccc.Contents))
+	key := utils.FindKey(data, ccc.Opts.Key, ccc.Contents)
 	ccc.Contents.Set(key, data)
 	return ccc.String(http.StatusCreated, key)
 }

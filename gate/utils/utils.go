@@ -13,7 +13,7 @@ import (
 )
 
 // find key value for types.State
-func FindKey(body types.State, key string, contents types.Content) string {
+func FindKey(body types.State, key string, contents *types.Content) string {
 	if key == "ip" {
 		var ip string
 		var last_ipv4 string
