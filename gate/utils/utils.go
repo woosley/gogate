@@ -8,6 +8,7 @@ import (
 	"github.com/woosley/gogate/gate/types"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 )
@@ -74,5 +75,33 @@ func ForwardToMaster(master string, data types.State) (string, error) {
 		return "", err
 	} else {
 		return string(body), nil
+	}
+}
+
+func IsDir(f string) (bool, error) {
+	finfo, err := os.Stat(f)
+	if err != nil {
+		return false, err
+	}
+
+	switch {
+	case finfo.IsDir():
+		return true, nil
+	default:
+		return false, nil
+	}
+}
+
+func IsFile(f string) (bool, error) {
+	finfo, err := os.Stat(f)
+	if err != nil {
+		return false, err
+	}
+
+	switch finfo.Mode().IsRegular() {
+	case true:
+		return true, nil
+	default:
+		return false, nil
 	}
 }

@@ -2,13 +2,13 @@ package gate
 
 import (
 	"fmt"
-	"time"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/woosley/gogate/gate/facts"
 	"github.com/woosley/gogate/gate/handlers"
 	"github.com/woosley/gogate/gate/types"
 	"github.com/woosley/gogate/gate/utils"
+	"time"
 )
 
 var status types.State
