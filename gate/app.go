@@ -2,13 +2,13 @@ package gate
 
 import (
 	"fmt"
+	"time"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/woosley/gogate/gate/facts"
 	"github.com/woosley/gogate/gate/handlers"
 	"github.com/woosley/gogate/gate/types"
 	"github.com/woosley/gogate/gate/utils"
-	"time"
 )
 
 var status types.State
@@ -28,6 +28,7 @@ func looper(options types.Opt) {
 	status.Interfaces, _ = facts.GetIfs()
 	status.Memory, status.Swap, _ = facts.GetMemory()
 	status.Cpu, _ = facts.GetCpu()
+	status.Uptime = facts.GetUptime()
 	status.LastUpdate = time.Now().Unix()
 	if options.Is_master {
 		key := utils.FindKey(status, options.Key, contents)

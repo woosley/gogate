@@ -50,6 +50,7 @@ type State struct {
 	Memory     string
 	Swap       string
 	Cpu        CpuInfo
+	Uptime     int64
 	LastUpdate int64
 }
 
