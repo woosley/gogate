@@ -1,0 +1,5 @@
+package:  github.com/woosley/gogate
+import:
+- package: github.com/labstack/echo
+  subpackages:
+  - middleware
