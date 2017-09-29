@@ -1,8 +1,12 @@
-hash: 95f28376562e3f4f0f11077a40f0347381f5b55f0442dc4fe910f9014c322bc7
-updated: 2017-09-28T06:18:31.437319222Z
+hash: cad5b4cf81a0433e109ffc5485540b2c56e72c6551c06b4e3350fbaa3cfbb095
+updated: 2017-09-29T08:19:27.632222012Z
 imports:
 - name: github.com/dgrijalva/jwt-go
   version: a539ee1a749a2b895533f979515ac7e6e0f5b650
+- name: github.com/go-ole/go-ole
+  version: 8a4f5c214bfb4475619b8bb7ccbe6fa5c91745f4
+  subpackages:
+  - oleutil
 - name: github.com/labstack/echo
   version: a625e589cffa33eac768ab98bc21518cef786e2d
   subpackages:
@@ -18,12 +22,14 @@ imports:
   version: ad5389df28cdac544c99bd7b9161a0b5b6ca9d1b
 - name: github.com/mattn/go-isatty
   version: a5cdd64afdee435007ee3e9f6ed4684af949d568
+- name: github.com/StackExchange/wmi
+  version: ea383cf3ba6ec950874b8486cd72356d007c768f
 - name: github.com/valyala/bytebufferpool
   version: e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7
 - name: github.com/valyala/fasttemplate
   version: dcecefd839c4193db0d35b88ec65b4c12d360ab0
 - name: golang.org/x/crypto
-  version: c84b36c635ad003a10f0c755dff5685ceef18c71
+  version: 76eec36fa14229c4b25bb894c2d0e591527af429
   subpackages:
   - acme
   - acme/autocert

@@ -2,13 +2,13 @@
 package facts
 
 import (
-	"os"
 	"bufio"
-	"strings"
-	"strconv"
-	"io/ioutil"
-	"github.com/woosley/gogate/gate/utils"
 	"github.com/woosley/gogate/gate/types"
+	"github.com/woosley/gogate/gate/utils"
+	"io/ioutil"
+	"os"
+	"strconv"
+	"strings"
 )
 
 var osfiles []string = []string{
@@ -109,7 +109,7 @@ func GetUptime() int64 {
 		upt, err := strconv.ParseFloat(up, 64)
 		if err != nil {
 			return zero
-		}else{
+		} else {
 			return int64(upt)
 		}
 	}
