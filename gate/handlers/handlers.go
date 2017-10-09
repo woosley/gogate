@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/labstack/echo"
 	"github.com/woosley/gogate/gate/types"
 	"github.com/woosley/gogate/gate/utils"
@@ -45,11 +46,38 @@ func Create(c echo.Context) error {
 
 	key := utils.FindKey(data, ccc.Opts.Key, ccc.Contents)
 	ccc.Contents.Set(key, data)
-	return ccc.String(http.StatusCreated, key)
+	return ccc.JSON(http.StatusCreated,
+		map[string]string{"message": "node created", "key": key, "code": fmt.Sprintf("%v", http.StatusCreated)})
 }
 
 func Health(c echo.Context) error {
 	ccc := c.(*types.CustomContext)
 	m := map[string]string{"state": "running"}
 	return ccc.JSON(http.StatusOK, m)
+}
+
+func GetNode(c echo.Context) error {
+	ccc := c.(*types.CustomContext)
+	key := ccc.Param("key")
+	v, ok := ccc.Contents.Get(key)
+	if !ok {
+		return ccc.JSON(http.StatusNotFound,
+			map[string]string{"message": "node not found!", "code": fmt.Sprintf("%v", http.StatusNotFound)})
+	} else {
+		return ccc.JSON(http.StatusOK, v)
+	}
+}
+
+func DeleteNode(c echo.Context) error {
+	ccc := c.(*types.CustomContext)
+	key := ccc.Param("key")
+	_, ok := ccc.Contents.Get(key)
+	if !ok {
+		return ccc.JSON(http.StatusNotFound,
+			map[string]string{"message": "node not found!", "code": fmt.Sprintf("%v", http.StatusNotFound)})
+	} else {
+		ccc.Contents.Delete(key)
+		return ccc.JSON(http.StatusOK,
+			map[string]string{"message": "node deleted!", "code": fmt.Sprintf("%v", http.StatusOK)})
+	}
 }

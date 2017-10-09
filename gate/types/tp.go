@@ -83,6 +83,12 @@ func (c *Content) Set(key string, value State) {
 	c.m[key] = value
 }
 
+func (c *Content) Delete(key string) {
+	c.Lock()
+	defer c.Unlock()
+	delete(c.m, key)
+}
+
 func (c *Content) MarshalJSON() ([]byte, error) {
 	c.RLock()
 	defer c.RUnlock()

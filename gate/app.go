@@ -55,6 +55,8 @@ func App(options types.Opt) {
 	e.GET("/", handlers.Index)
 	e.GET("/self", handlers.Self)
 	e.GET("/health", handlers.Health)
+	e.GET("/:key", handlers.GetNode)
+	e.DELETE("/:key", handlers.DeleteNode)
 	e.POST("/", handlers.Create)
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%d", options.Listen)))
 }
