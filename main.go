@@ -18,6 +18,7 @@ var options types.Opt = types.Opt{
 	Key:       "ip",
 	//Expire:    60,
 	Version: false,
+	Debug:   false,
 }
 
 func init() {
@@ -33,12 +34,15 @@ func init() {
 	flag.StringVar(&options.Key, "key", options.Key, "the uniq key to the nodes")
 	flag.BoolVar(&options.Version, "v", options.Version, "print current version")
 	flag.BoolVar(&options.Version, "version", options.Version, "print current version")
+	flag.BoolVar(&options.Debug, "d", options.Version, "enable debug logging")
+	flag.BoolVar(&options.Debug, "debug", options.Version, "enable debug logging")
 	flag.Usage = print_help
 }
 
 func print_help() {
 	help := `gogate -- keep your machine state
 	-h|--help show help 
+	-d|--debug enable debug logging
 	-p|--port listen port
 	-m|--master master url
 	-k|--key the uniq key to the node

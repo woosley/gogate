@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
+	"github.com/labstack/gommon/log"
 	"github.com/woosley/gogate/gate/facts"
 	"github.com/woosley/gogate/gate/handlers"
 	"github.com/woosley/gogate/gate/types"
@@ -50,13 +51,20 @@ func App(options types.Opt) {
 		}
 	})
 
-	go runForever(options)
+	if options.Debug {
+		e.Logger.SetLevel(log.DEBUG)
+	} else {
+		e.Logger.SetLevel(log.INFO)
+	}
 
+	go runForever(options)
+	e.HideBanner = true
 	e.GET("/", handlers.Index)
 	e.GET("/self", handlers.Self)
 	e.GET("/health", handlers.Health)
 	e.GET("/:key", handlers.GetNode)
 	e.DELETE("/:key", handlers.DeleteNode)
 	e.POST("/", handlers.Create)
+	e.Logger.Info(fmt.Sprintf("Starting gogate on %v", options.Listen))
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%d", options.Listen)))
 }

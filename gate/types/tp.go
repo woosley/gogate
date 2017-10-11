@@ -40,6 +40,7 @@ type Opt struct {
 	Expire      int
 	Key         string
 	Version     bool
+	Debug       bool
 }
 
 type State struct {
