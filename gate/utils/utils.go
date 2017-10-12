@@ -15,11 +15,17 @@ import (
 
 // find key value for types.State
 func FindKey(body types.State, key string, contents *types.Content) string {
+	blacklist := []string{"docker0", "lo"}
 	if key == "ip" {
 		var ip string
 		var last_ipv4 string
 		for _, v := range body.Interfaces {
 			// if there is already a same key in content
+
+			if ListHasString(blacklist, v.Name) {
+				continue
+			}
+
 			for _, _ip := range v.Ips {
 				_, exists := contents.Get(_ip)
 				if exists {
@@ -104,4 +110,13 @@ func IsFile(f string) (bool, error) {
 	default:
 		return false, nil
 	}
+}
+
+func ListHasString(list []string, s string) bool {
+	for _, v := range list {
+		if s == v {
+			return true
+		}
+	}
+	return false
 }

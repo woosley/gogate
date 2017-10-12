@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/woosley/gogate/gate/types"
+	"github.com/woosley/gogate/gate/utils"
 	"net"
 	"strings"
 )
@@ -18,26 +19,23 @@ func GetIfs() ([]types.Intf, error) {
 	}
 
 	_ifs := make([]types.Intf, 0)
-OUTER:
 	for _, i := range ifs {
 		name := i.Name
 
 		//skip if not up
 		if i.Flags&net.FlagUp == 0 {
-			continue OUTER
+			continue
 		}
 		//skip if no mac address
 		if bytes.Compare(i.HardwareAddr, nil) == 0 {
-			continue OUTER
+			continue
 		}
 
 		mac := i.HardwareAddr.String()
 
 		//skip blacklist
-		for _, bl := range blacklist {
-			if string(name) == bl {
-				continue OUTER
-			}
+		if utils.ListHasString(blacklist, name) {
+			continue
 		}
 
 		ips := make([]string, 0)
