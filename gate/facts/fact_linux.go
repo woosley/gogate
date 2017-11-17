@@ -3,6 +3,7 @@ package facts
 
 import (
 	"bufio"
+	"fmt"
 	"github.com/woosley/gogate/gate/types"
 	"github.com/woosley/gogate/gate/utils"
 	"io/ioutil"
@@ -129,11 +130,22 @@ func GetDiskInfo() []types.DiskInfo {
 	pdisks := make([]types.DiskInfo, 0)
 	disks, _ := utils.LsDir(AllBlocksDir)
 	vdisks, _ := utils.LsDir(VirtualBlocksDir)
+
 	// physical is what listed in AllBlocksDir but not in VirtualBlocksDir
 	for _, v := range disks {
 		if !utils.ListHasString(vdisks, v) {
-			pdisks = append(pdisks, types.DiskInfo{Name: v})
+			size := GetDiskSize(v)
+			pdisks = append(pdisks, types.DiskInfo{Name: v, Size: size})
 		}
 	}
 	return pdisks
+}
+
+func GetDiskSize(disk string) string {
+	sectors, _ := utils.SlurpFile(fmt.Sprintf("%s/%s/size", AllBlocksDir, disk))
+	sectorSize, _ := utils.SlurpFile(fmt.Sprintf("%s/%s/queue/hw_sector_size", AllBlocksDir, disk))
+	s1, _ := strconv.Atoi(sectors[0])
+	s2, _ := strconv.Atoi(sectorSize[0])
+	return fmt.Sprintf("%vMB", s1*s2/1000/1000)
+
 }
