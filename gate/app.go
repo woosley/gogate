@@ -30,6 +30,7 @@ func looper(options types.Opt) {
 	status.Memory, status.Swap, _ = facts.GetMemory()
 	status.Cpu, _ = facts.GetCpu()
 	status.Uptime = facts.GetUptime()
+	status.Disks = facts.GetDiskInfo()
 	status.LastUpdate = time.Now().Unix()
 	if options.Is_master {
 		key := utils.FindKey(status, options.Key, contents)

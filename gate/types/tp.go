@@ -51,10 +51,15 @@ type State struct {
 	Memory     string
 	Swap       string
 	Cpu        CpuInfo
+	Disks      []DiskInfo
 	Uptime     int64
 	LastUpdate int64
 }
 
+type DiskInfo struct {
+	Name string
+	Size string
+}
 type CpuInfo struct {
 	Count int
 	Cores int

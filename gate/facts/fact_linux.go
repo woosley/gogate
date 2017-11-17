@@ -16,6 +16,11 @@ var osfiles []string = []string{
 	"/etc/os-release",
 }
 
+const (
+	AllBlocksDir     = "/sys/block"
+	VirtualBlocksDir = "/sys/devices/virtual/block"
+)
+
 const unknown string = "Unknown"
 const zero int64 = 0
 
@@ -114,4 +119,21 @@ func GetUptime() int64 {
 		}
 	}
 	return zero
+}
+
+func GetDiskInfo() []types.DiskInfo {
+	// lsdir /sys/block
+	// lsdir /sys/devices/virtual/block
+	// /sys/block/sda/queue/hw_sector_size disk sector size
+	// /sys/block/sda/size disk sectors
+	pdisks := make([]types.DiskInfo, 0)
+	disks, _ := utils.LsDir(AllBlocksDir)
+	vdisks, _ := utils.LsDir(VirtualBlocksDir)
+	// physical is what listed in AllBlocksDir but not in VirtualBlocksDir
+	for _, v := range disks {
+		if !utils.ListHasString(vdisks, v) {
+			pdisks = append(pdisks, types.DiskInfo{Name: v})
+		}
+	}
+	return pdisks
 }

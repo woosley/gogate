@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"bufio"
 	"bytes"
 	"encoding/json"
 	"errors"
@@ -119,4 +120,31 @@ func ListHasString(list []string, s string) bool {
 		}
 	}
 	return false
+}
+
+//SlurpFile read a file's each line into a string list
+func SlurpFile(s string) ([]string, error) {
+	content := make([]string, 0)
+	if file, err := os.Open(s); err != nil {
+		return content, err
+	} else {
+		fscanner := bufio.NewScanner(file)
+		for fscanner.Scan() {
+			content = append(content, fscanner.Text())
+		}
+		return content, nil
+	}
+}
+
+//GetDirs gets all dir names under a dir
+func LsDir(s string) ([]string, error) {
+	adirs := make([]string, 0)
+	if dirs, err := ioutil.ReadDir(s); err != nil {
+		return adirs, err
+	} else {
+		for _, f := range dirs {
+			adirs = append(adirs, f.Name())
+		}
+		return adirs, nil
+	}
 }
