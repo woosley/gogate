@@ -3,22 +3,23 @@ package facts
 
 import (
 	"bufio"
-	"fmt"
 	"github.com/woosley/gogate/gate/types"
 	"github.com/woosley/gogate/gate/utils"
 	"io/ioutil"
+	"fmt"
 	"os"
 	"strconv"
 	"strings"
 )
+
 
 var osfiles []string = []string{
 	"/etc/redhat-release",
 	"/etc/os-release",
 }
 
-const (
-	AllBlocksDir     = "/sys/block"
+const  (
+	AllBlocksDir = "/sys/block"
 	VirtualBlocksDir = "/sys/devices/virtual/block"
 )
 
@@ -122,7 +123,7 @@ func GetUptime() int64 {
 	return zero
 }
 
-func GetDiskInfo() []types.DiskInfo {
+func GetDiskInfo() []types.DiskInfo{
 	// lsdir /sys/block
 	// lsdir /sys/devices/virtual/block
 	// /sys/block/sda/queue/hw_sector_size disk sector size
@@ -132,7 +133,7 @@ func GetDiskInfo() []types.DiskInfo {
 	vdisks, _ := utils.LsDir(VirtualBlocksDir)
 
 	// physical is what listed in AllBlocksDir but not in VirtualBlocksDir
-	for _, v := range disks {
+	for _, v := range(disks) {
 		if !utils.ListHasString(vdisks, v) {
 			size := GetDiskSize(v)
 			pdisks = append(pdisks, types.DiskInfo{Name: v, Size: size})
@@ -145,7 +146,7 @@ func GetDiskSize(disk string) string {
 	sectors, _ := utils.SlurpFile(fmt.Sprintf("%s/%s/size", AllBlocksDir, disk))
 	sectorSize, _ := utils.SlurpFile(fmt.Sprintf("%s/%s/queue/hw_sector_size", AllBlocksDir, disk))
 	s1, _ := strconv.Atoi(sectors[0])
-	s2, _ := strconv.Atoi(sectorSize[0])
-	return fmt.Sprintf("%vMB", s1*s2/1000/1000)
+	s2, _ := strconv.Atoi(sectorSize[0]) 
+	return fmt.Sprintf("%vMB", s1 * s2/1000/1000)
 
 }
